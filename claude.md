@@ -6,7 +6,7 @@
 
 This project is a modular LaTeX resume system designed to separate raw data from visual presentation, enabling easy and scalable tailoring of resumes.
 
-*   **/base/**: This directory is the immutable, read-only Source of Truth for raw content. It contains all potential building blocks of your resume data, including comprehensive CV sections (like leadership or conferences).
+*   **/base/**: This directory is the immutable, read-only Source of Truth for raw content. It contains all potential building blocks of your resume data, including comprehensive CV sections (like leadership or conferences). **The bullets inside `/base/` are verbose, comprehensive descriptions written to capture maximum detail — they are NOT finished resume bullets.** Treat them as a pool of raw facts, metrics, and achievements. For each tailored resume, rewrite fresh, compressed bullets rather than copying base text verbatim. A bullet in `/base/` that spans 3 lines should become a 1-line tailored bullet by stripping filler phrasing and retaining only the most JD-relevant fact and metric.
 *   **/sections/**: This is the working directory for tailored resumes. Here, specific sections are assembled or customized for targeted job applications.
 *   **`main.tex`**: The master controller for the 1-page resume. This file pulls together the tailored version of your resume from `/sections/`. It can be modified below the "RESUME STARTS HERE" line (line 113) to omit or include sections.
 *   **`main-csv.tex`**: The controller for the comprehensive Master CV. This reads directly from `/base/` and includes all sections. **The agent must never modify or run this file; it is strictly for the user.**
@@ -56,8 +56,13 @@ Every bullet point must follow this structure. A bullet that lacks any one of th
 
 ### Formatting Constraints
 *   Always use `\textbf{...}` for quantitative metrics (numbers, percentages, scale) to make them pop for recruiters.
-*   **Strictly** keep bullet points concise (maximum 2 lines; no exceptions).
-*   Each entry (experience/project) must include **exactly 2–3 bullet points** in the tailored output — never more, regardless of how many bullets exist in `/base/`. `/base/` entries may contain 4–5 bullets as a pool to choose from; the agent must select the 2–3 most JD-relevant ones and discard the rest. Pasting all bullets verbatim from `/base/` is forbidden.
+*   **Target 1 rendered line per bullet; 2 lines is the hard ceiling, not the target.** Before finalizing any bullet, ask: can the key fact and metric be expressed in one line? Strip filler phrasing (e.g., "to establish the correct data source for downstream monitoring", "across 20+ distinct sources") if the core action and metric already stand alone. Never pad a bullet to 2 lines when 1 line suffices.
+*   **Bullet count and compression are tiered by recency and JD relevance — not by entry type:**
+    *   **Highest-priority entry** (most recent + most JD-relevant, typically the current internship): **3 bullets** — target a mix of 2 one-liners and 1 two-liner. Recency and relevance justify more space; it is acceptable to compress other entries to keep this one full.
+    *   **High-priority entries** (other strong experience or primary research): **2 bullets**, targeting 1 line each.
+    *   **Projects are the first place to trim** when space is tight — not because they are unimportant, but because they have the most flexibility. A highly relevant project stays at 2 bullets; a lower-priority one is compressed to 1 bullet (1 line). See `/templates/projects.tex`, which shows this pattern explicitly.
+    *   **Do not get greedy**: 3–4 strong entries with real content beats 6 thin entries where every bullet is stripped to the point of losing impact. Quality over quantity.
+    *   `/base/` entries may contain 4–5 bullets as a pool; select the most JD-relevant ones and discard the rest. Pasting all bullets verbatim is forbidden.
 *   Every bullet must begin with a strong past-tense action verb. **Banned phrases**: "responsible for", "helped", "assisted", "worked on", "involved in", "contributed to". These are passive and weak — replace with a concrete verb.
 *   **Keyword Integration**: Reproduce JD keywords verbatim (see Rule 8) throughout bullet points. Density matters for ATS scoring, but integration must read naturally.
 *   **Verb Diversity**: Draw from a broad verb bank. Do not reuse a verb within the same job/project block. Suggested verbs: Engineered, Architected, Optimized, Automated, Accelerated, Reduced, Designed, Implemented, Developed, Deployed, Refactored, Integrated, Benchmarked, Profiled, Parallelized, Containerized, Orchestrated, Authored, Delivered, Scaled, Migrated, Spearheaded, Eliminated.
@@ -83,17 +88,31 @@ To ensure the user only ever has to paste a Job Description (JD) and nothing els
     * If the JD uses specific phrasing, jargon, or nouns (e.g., "massively-parallel systems", "compiler overhead", "high performance computing", "multi-agent models"), you must rewrite existing bullet items to **inject these exact phrases byte-for-byte**. 
     * Never use high-level synonyms or summaries where a byte-for-byte match is possible. Your sole cognitive focus must be maximizing exact ATS string density in a single, fast compilation turn.
 3. **Automatic Keyword Extraction:** The agent must parse the provided JD and extract **all** matchable keywords — every skill, tool, framework, methodology, and concept that has a corresponding entry in `/base/`. Capture the exact syntax of each keyword (including punctuation and casing) for use in Rule 8. The goal is maximum ATS keyword density, not a ranked shortlist.
-4. **Automatic Prioritization & Trimming:** To guarantee a 1-page fit on the very first try without multiple compile loops, the agent must autonomously evaluate all experiences and projects in `/base/`. It must automatically prioritize those that match the extracted keywords and **proactively drop** the least relevant projects or older experiences. **The agent must not wait for the user to specify what to drop.** To fit within the 1-page budget, the agent should drop entire non-essential sections or roles to keep remaining entries robust, rather than stripping projects down to a single, metric-less sentence (maintain the 2-3 bullets per entry requirement).
+4. **Automatic Prioritization, Trimming & Stale Phrasing Removal:** To guarantee a 1-page fit on the very first try, the agent must autonomously evaluate all experiences and projects in `/base/` and proactively drop the least relevant entries. **The agent must not wait for the user to specify what to drop.** Additionally, when rewriting bullets from `/base/`, **actively strip phrasing that was written for previous applications and does not serve the current JD.** Base bullets may contain verbose clauses added for earlier tailorings (e.g., "to establish the correct data source for downstream monitoring", "handling multi-layer seasonality across 10+ workflows and 30+ countries"). If a clause does not contain a JD keyword or a key metric, remove it and let the bullet stand on its shorter, cleaner form. The goal is to surface the raw fact and metric, then dress only with current-JD keywords — not to preserve old phrasing.
 5. **Zero-Friction Execution:** The user's only job is to paste the JD. The agent assumes full responsibility for making all editorial choices (trimming, rewording, selecting) to instantly produce a tailored, 1-page ATS-compliant PDF. Do not ask the user clarifying questions about what to include or exclude — make the best executive decision based on the JD.
 
 ## Execution Efficiency & Page-Budget Planning (Anti-Loop Protections)
 
 To prevent taking wrong turns, wasting API costs, and falling into long, slow compilation loops, you must adhere to these optimization guidelines:
 
-1. **Calculate the Element Budget First (Bias Conservative)**: Before writing any files, perform vertical height mental math. A standard 1-page resume with a compact education section has space for about **55–60 lines** of content. **Start with the most conservative layout that guarantees 1-page fit**, and only add sections if needed:
-    * **Safe Default Budget**: `2 companies + 1 research lab + 2 projects (2 bullets each)` — this is your target first draft.
-    * **Expanded Budget (only attempt if education is compact and first compile succeeds)**: `2 companies + 1 research lab + 3 projects (1 bullet each)`.
-    * It is far cheaper to add a project after a successful first compile than to enter a 5-iteration trimming loop. **When in doubt, leave it out of the first draft.**
+1. **Calculate the Line Budget Before Writing Anything**: A 1-page resume with compact education holds about **55–60 lines**. Before writing any files, run the following line-cost math to plan your layout:
+    ```
+    Line costs (approximate):
+      Section header (e.g. "Work Experience"):  1 line
+      Entry subheading (company + title + dates): 1.5 lines
+      1-line bullet:                             1 line
+      2-line bullet:                             2 lines
+      Skills section (3 rows):                  3 lines
+      Education (compact, 1 honors bullet):      2 lines
+      Section headers total (4 sections):        4 lines
+    ```
+    **Reference density (use Adobe as the anchor):** The highest-priority entry gets 3 bullets (2 one-liners + 1 two-liner) = ~5.5 lines. Every other entry compresses relative to this. A layout with Adobe (3 bullets) + 2 other companies (2 bullets × 1-line) + 2 research labs (2 + 1 bullets × 1-line) + 3 projects (2 + 1 + 1 bullets × 1-line) totals ~38–42 lines — comfortably on one page.
+    * **Start with the safe default** (3 companies + 1 research lab + 2 projects) and verify the first compile hits 1 page before expanding.
+    * It is far cheaper to add an entry after a successful first compile than to enter a 5-iteration trimming loop. **When in doubt, leave it out of the first draft.**
 2. **High-Entropy Coarse Trimming**: If the first compile yields 2 pages, **do not attempt word-level or character-level micro-trimming first.** Word-level shaving takes 4–5 iterations to resolve. Instead, make an immediate, high-entropy structural cut: drop a non-essential secondary project, remove an entire secondary research role, or eliminate a full bullet point. Shave off major blocks first to drop the page count to 1 instantly, then fine-tune.
-3. **Compress-Before-Drop (Space Recovery)**: Before cutting an entry entirely, consider whether compressing a lower-priority entry to **1 bullet** recovers enough space to include a higher-value entry that would otherwise be dropped. This is preferable to losing a relevant entry completely. For example: if including a second research lab would add 4 lines but a lower-priority project could be trimmed from 2 bullets to 1 (saving ~2 lines), apply both — compress the project and add the lab. Use this when the gained entry has meaningfully higher JD keyword density than the dropped bullet.
+3. **Compress-Before-Drop (Space Recovery)**: Before cutting an entry entirely, work through this ordered hierarchy to recover space:
+    1. **Compress a project from 2 bullets to 1** — saves ~1–2 lines while keeping the entry's keyword and header signal.
+    2. **Drop the education honors bullet** — the single honors line (`Competitive Programming Club, NSF REU Fellow...`) saves ~1 line and has near-zero ATS value compared to a project or research entry. The education subheading alone (university, degree, GPA, dates) is sufficient. Drop the honors bullet before dropping any technical project entry.
+    3. **Drop a whole low-priority entry** — only after steps 1 and 2 are exhausted.
+    This ordering means a project with JD keywords should almost always survive over the honors line.
 4. **Log-Driven Debugging**: If compilation fails or overflows, check `output/main.log` on the first iteration to find the exact line and vertical box overflow (`Overfull \vbox`) instead of guessing.
