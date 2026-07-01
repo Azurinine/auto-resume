@@ -44,6 +44,7 @@ This project is a modular LaTeX resume system designed to separate raw data from
 *   **Experiences**: All professional experiences must be structured using the `\resumeSubheading` and `\resumeItemListStart` macros defined in the project's preamble.
 *   **Projects**: Ensure all project entries include placeholders for hyperlinks, utilizing the existing project heading macros to maintain a clean and clickable layout.
 *   **Skills Section**: Technology names in the Skills section must mirror the exact syntax used in the JD (e.g., if the JD says "React.js", the skills section must say "React.js", not "React" or "ReactJS").
+*   **Skills Row Length**: Each of the 3 skills rows must fit on **exactly 1 rendered line**. When adding JD-specific keywords to a row, you must simultaneously remove items that are irrelevant to the JD to keep the row from wrapping. For example, adding "Linux, build systems, static analysis, sanitizers" to a systems JD means removing web frameworks like "Django, Flask, FastAPI" that have no JD relevance. Never let a skills row grow to 2 lines.
 
 ## Bullet Point Content Guidelines
 
@@ -56,7 +57,7 @@ Every bullet point must follow this structure. A bullet that lacks any one of th
 
 ### Formatting Constraints
 *   Always use `\textbf{...}` for quantitative metrics (numbers, percentages, scale) to make them pop for recruiters.
-*   **Target 1 rendered line per bullet; 2 lines is the hard ceiling, not the target.** Before finalizing any bullet, ask: can the key fact and metric be expressed in one line? Strip filler phrasing (e.g., "to establish the correct data source for downstream monitoring", "across 20+ distinct sources") if the core action and metric already stand alone. Never pad a bullet to 2 lines when 1 line suffices.
+*   **Target 1 rendered line per bullet; 2 lines is the hard ceiling, not the target.** A true 1-line bullet at resume width contains **≤95 characters** (including spaces). Character count is the correct measure — word count is unreliable because long technical terms like `"compiler instrumentation"` or `"redundancy-aware frameworks"` consume far more width than short words. Before finalizing any bullet you plan to count as "1-line" in the page budget, count its characters. If it exceeds 95 characters, it will wrap to 2 lines — either trim it or reclassify it as a 2-liner in your budget. This is the most common cause of unexpected page overflow: the line-cost math is correct but the character counts are wrong.
 *   **Bullet count and compression are tiered by recency and JD relevance — not by entry type:**
     *   **Highest-priority entry** (most recent + most JD-relevant, typically the current internship): **3 bullets** — target a mix of 2 one-liners and 1 two-liner. Recency and relevance justify more space; it is acceptable to compress other entries to keep this one full.
     *   **High-priority entries** (other strong experience or primary research): **2 bullets**, targeting 1 line each.
