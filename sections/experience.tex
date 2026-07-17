@@ -1,12 +1,14 @@
 \resumeSubHeadingListStart
   \resumeSubheading
+\resumeSubheading
     {Adobe}{San Jose, CA}
     {Software Engineering Intern}{June 2026 -- Sept. 2026}
     \resumeItemListStart
         \vspace{-4pt}
         \resumeItem{Designed a machine learning anomaly detector using statistical algorithms to flag payment anomalies across \textbf{30+} countries and \textbf{10+} large-scale workflows.}
         \resumeItem{Applied software design principles to build an MLOps pipeline for weekly retraining and hourly inference; surfaced a \textbf{26-hour} outage across \textbf{1,272} monitoring segments.}
-        \resumeItem{Profiled \textbf{60.6M+} payment events in Databricks, identifying \textbf{86,387} duplicate records and a \textbf{47\%} null rate to establish the primary validation benchmark.}
+        \resumeItem{Shipped a per-KPI configuration system decoupling detector tuning from fitting logic, validated by \textbf{15} regression tests asserting byte-identical parity (rtol $10^{-9}$) with the frozen baseline across a revert-reland cycle.}
+        \resumeItem{Proved daily aggregation cut anomaly alerts \textbf{18$\times$} (145 $\to$ 8 over 14 days) while preserving the one systemic event, by showing hourly's flag rate was coverage-pinned (corr = 0.11) rather than signal-driven across \textbf{1,985} candidate segments.}
     \resumeItemListEnd
   \resumeSubheading
     {VALT Health}{Remote}
