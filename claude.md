@@ -96,20 +96,23 @@ To ensure the user only ever has to paste a Job Description (JD) and nothing els
 
 To prevent taking wrong turns, wasting API costs, and falling into long, slow compilation loops, you must adhere to these optimization guidelines:
 
-1. **Calculate the Line Budget Before Writing Anything**: A 1-page resume with compact education holds about **55–60 lines**. Before writing any files, run the following line-cost math to plan your layout:
+1. **Calculate the Line Budget Before Writing Anything**: A 1-page resume with compact education has a **page capacity of ~55–60 rendered lines**. Before writing any files, run the following line-cost math and aim to **fill the page**, not leave it sparse:
     ```
     Line costs (approximate):
       Section header (e.g. "Work Experience"):  1 line
       Entry subheading (company + title + dates): 1.5 lines
-      1-line bullet:                             1 line
-      2-line bullet:                             2 lines
+      Research sub-subheading (project name row): 0.5 lines
+      1-line bullet (≤95 chars):                 1 line
+      2-line bullet (>95 chars):                 2 lines
       Skills section (3 rows):                  3 lines
       Education (compact, 1 honors bullet):      2 lines
       Section headers total (4 sections):        4 lines
     ```
-    **Reference density (use Adobe as the anchor):** The highest-priority entry gets 3 bullets (2 one-liners + 1 two-liner) = ~5.5 lines. Every other entry compresses relative to this. A layout with Adobe (3 bullets) + 2 other companies (2 bullets × 1-line) + 2 research labs (2 + 1 bullets × 1-line) + 3 projects (2 + 1 + 1 bullets × 1-line) totals ~38–42 lines — comfortably on one page.
-    * **Start with the safe default** (3 companies + 1 research lab + 2 projects) and verify the first compile hits 1 page before expanding.
-    * It is far cheaper to add an entry after a successful first compile than to enter a 5-iteration trimming loop. **When in doubt, leave it out of the first draft.**
+    **Target fill: 48–52 lines (~85–90% of page capacity).** Layouts under **45 lines** leave visible white space below Technical Skills and are under-filled — add a research entry, expand a project to 2 bullets, or add a bullet to a high-priority experience block before compiling.
+    **Reference density (full-page target, use Adobe as the anchor):** Adobe (4 bullets: 3 one-liners + 1 two-liner) + 2 other companies (3 + 2 bullets) + 3 research blocks (2 + 2 + 1 bullets) + 3 projects (2 + 2 + 1 bullets) ≈ **50–52 lines** — fills one page without overflow.
+    * **Default first draft:** 3 companies + 2–3 research entries + 3 projects. Do not stop at the old sparse default (3 companies + 1 research + 2 projects ≈ 38 lines) unless the JD is extremely narrow.
+    * **Under-fill recovery:** If the PDF has white space below skills, add JD-relevant bullets or entries — do not ship a half-empty page.
+    * **Overflow recovery:** If the compile hits 2 pages, use compress-before-drop (see §3) — never micro-trim first.
 2. **High-Entropy Coarse Trimming**: If the first compile yields 2 pages, **do not attempt word-level or character-level micro-trimming first.** Word-level shaving takes 4–5 iterations to resolve. Instead, make an immediate, high-entropy structural cut: drop a non-essential secondary project, remove an entire secondary research role, or eliminate a full bullet point. Shave off major blocks first to drop the page count to 1 instantly, then fine-tune.
 3. **Compress-Before-Drop (Space Recovery)**: Before cutting an entry entirely, work through this ordered hierarchy to recover space:
     1. **Compress a project from 2 bullets to 1** — saves ~1–2 lines while keeping the entry's keyword and header signal.

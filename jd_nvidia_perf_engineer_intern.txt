@@ -1,0 +1,51 @@
+Performance Engineer Intern, Systems Software- Fall 2026
+US, MO, St. Louis
+
+Job Description
+
+Company
+Job Requisition ID
+JR2015779
+Job Category
+Univ Employment
+Time Type
+Full time
+NVIDIA is a worldwide technology company headquartered in Santa Clara, California. NVIDIA manufactures graphics processing units (GPUs), as well as system on a chip units (SOCs) for the expanding markets. Our work in visual computing, the art and science of computer graphics, has led to thousands of patented inventions, breakthrough technologies, deep industry relationships and a globally recognized brand. Our work opens up new universes to explore, enables amazing creativity and discovery, and powers inventions such as artificial intelligence and autonomous cars.
+
+You would join the team responsible for the maintenance, development, and execution of Desktop Gaming Performance testing in Linux and Windows environments for the world's fastest, power efficient GPUs. This job has a preferred duration of 8-12 months.
+
+What you'll be doing:
+
+Writing and maintaining containerized GPU accelerated workloads for the financial services industry, from deep learning training and inference, to portfolio optimization and backtesting.
+
+Running, validating, and analyzing benchmarking models at scale on HPC clusters.
+
+Visualizing performance data, building charts and dashboards using internal schemas and tooling.
+
+Working closely with the latest and greatest in financial AI models and tooling to help build reference models for NVIDIA.
+
+What we need to see:
+
+Enrolled in a Bachelors program majoring in Computer Engineering, Software Engineering, Computer Science, or related field.
+
+Desire to improve code quality by learning and applying computer science fundamentals, algorithms, and data structures.
+
+Comfort with teamwork, collaboration, and a desire to reach across functional borders to develop new partnerships.
+
+Active experience with Python.
+
+Working comfort in a Linux command-line environment with version control.
+
+Foundational understanding and interest of the machine learning lifecycle (training, evaluation, and inference).
+
+Ways to stand out from the crowd:
+
+Familiarity with PyTorch and/or training, testing, and evaluating machine learning models.
+
+Experience with GPU computing or CUDA and libraries like cuOPT, CUTLASS, cuDNN, etc.
+
+Exposure to workload orchestration and job schedulers (Kubernetes, Slurm).
+
+Experience with containerized applications and resource management.
+
+Interest in quantitative finance and applying performance data to real-world problems.
