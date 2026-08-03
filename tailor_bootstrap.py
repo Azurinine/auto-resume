@@ -163,6 +163,77 @@ def save_registry(registry):
     except Exception as e:
         print(f"Error: Could not write registry.json: {e}", file=sys.stderr)
 
+def strip_latex(text):
+    """Remove LaTeX commands/braces so JD-style keyword extraction can run on .tex content."""
+    text = re.sub(r'\\[a-zA-Z]+\*?', ' ', text)   # drop \commands
+    text = re.sub(r'[{}$|]', ' ', text)            # drop braces, math, pipes
+    return text
+
+def summarize_layout(archive_name):
+    """
+    Produce a human-readable LAYOUT summary of an archived resume: which section files
+    exist and, per entry (company/project), how many bullets it used. This is the ONLY
+    thing the archive is allowed to contribute — the wording/metrics of bullets must be
+    re-derived from /base/ (see Rule 9, anti-fabrication). No bullet text is emitted here.
+    """
+    archive_src = os.path.join(ARCHIVE_DIR, archive_name)
+    # Only the sections main.tex actually renders (the 1-page resume omits leadership/conferences).
+    order = ["header", "education", "experience", "research", "projects", "skills"]
+    tex_files = set(f for f in os.listdir(archive_src) if f.endswith(".tex"))
+
+    lines = []
+    for section in order:
+        fname = f"{section}.tex"
+        if fname not in tex_files:
+            continue
+        try:
+            with open(os.path.join(archive_src, fname)) as fh:
+                content = fh.read()
+        except Exception:
+            continue
+        # \resumeSubheading / \resumeProjectHeading mark entries; the *ListStart wrappers
+        # (\resumeSubHeadingListStart, capital H) are deliberately NOT matched.
+        markers = list(re.finditer(r'\\resume(?:Subheading|ProjectHeading)', content))
+        entries = []
+        for idx, m in enumerate(markers):
+            end = markers[idx + 1].start() if idx + 1 < len(markers) else len(content)
+            chunk = content[m.start():end]
+            # The entry's name is the FIRST innermost {...} group after the macro
+            # (company for \resumeSubheading, the \textbf{Name} arg for projects).
+            label_m = re.search(r'\{([^{}]+)\}', chunk)
+            label = re.sub(r'\\[a-zA-Z]+\*?', '', label_m.group(1)).strip() if label_m else "(entry)"
+            n = len(re.findall(r'\\resumeItem\{', chunk))
+            entries.append((label, n))
+        if entries:
+            desc = "; ".join(f"{lbl} ({n} bullet{'' if n == 1 else 's'})" for lbl, n in entries)
+            lines.append(f"- **{section}**: {desc}")
+        else:
+            lines.append(f"- **{section}**: (present, no bulleted entries)")
+    return "\n".join(lines)
+
+def write_layout_hint(archive_name, score):
+    """Write sections/.layout_hint.md: the matched archive's STRUCTURE only, as a reference
+    for mirroring the already-solved 1-page layout. Facts/metrics still come from /base/."""
+    summary = summarize_layout(archive_name)
+    hint = (
+        "# Layout reference — NOT a source of facts\n\n"
+        f"Closest prior resume: `archive/{archive_name}/` (similarity {score:.0%}).\n\n"
+        "Use this ONLY to mirror the page-budget layout that already fit on one page: which\n"
+        "sections/entries were included and how many bullets each carried. **Re-derive every\n"
+        "bullet's wording and metrics from `/base/` (the ground truth). NEVER copy bullet text\n"
+        "from the archive — it may contain claims not grounded in `/base/` (Rule 9).**\n\n"
+        f"## Structure that fit one page for a similar JD\n{summary}\n"
+    )
+    with open(os.path.join(SECTIONS_DIR, ".layout_hint.md"), "w") as f:
+        f.write(hint)
+    print(f"Wrote sections/.layout_hint.md (structure of '{archive_name}'; bullet text NOT copied).")
+
+def _copy_base_into_sections():
+    """Copy the immutable /base/ ground-truth .tex into sections/."""
+    for f in os.listdir(BASE_DIR):
+        if f.endswith(".tex"):
+            shutil.copy(os.path.join(BASE_DIR, f), os.path.join(SECTIONS_DIR, f))
+
 def bootstrap(jd_path, threshold_perfect=0.85, threshold_good=0.40):
     """Bootstrap workspace from the closest matching archive or the clean base."""
     if not os.path.exists(jd_path):
@@ -206,29 +277,21 @@ def bootstrap(jd_path, threshold_perfect=0.85, threshold_good=0.40):
     
     if best_score >= threshold_perfect:
         print(f"🎯 TIER 1 MATCH (>= {threshold_perfect:.0%}): PERFECT overlap!")
-        print(f"Recommending instant reuse of existing PDF: 'output/{best_match}.pdf'")
-        print(f"Bootstrapping sections from '{best_match}' for safety.")
-        
-        # Copy cached files
-        archive_src = os.path.join(ARCHIVE_DIR, best_match)
-        for f in os.listdir(archive_src):
-            if f.endswith(".tex"):
-                shutil.copy(os.path.join(archive_src, f), os.path.join(SECTIONS_DIR, f))
-        print("Done. Workspace successfully bootstrapped.")
-        
+        print(f"A near-identical resume already exists: 'output/{best_match}.pdf' — reuse it if the JD truly matches.")
+        print("Re-grounding sections/ from /base/ (facts) with a layout reference, in case edits are needed.")
+        _copy_base_into_sections()
+        write_layout_hint(best_match, best_score)
+        print("Done. Workspace bootstrapped from base with a layout reference.")
+
     elif best_score >= threshold_good:
         print(f"⚡ TIER 2 MATCH (>= {threshold_good:.0%}): MODERATE overlap!")
-        print(f"Bootstrapping starting draft from archived folder: 'archive/{best_match}/'")
-        print("This preserves visual layout decisions (exactly 1 page) and high-quality reframing.")
-        print("The agent will only need a rapid 1-turn 'polish' run to align exact-string phrasing!")
-        
-        # Copy cached files
-        archive_src = os.path.join(ARCHIVE_DIR, best_match)
-        for f in os.listdir(archive_src):
-            if f.endswith(".tex"):
-                shutil.copy(os.path.join(archive_src, f), os.path.join(SECTIONS_DIR, f))
-        print("Done. Workspace successfully bootstrapped.")
-        
+        print(f"Using 'archive/{best_match}/' as a LAYOUT REFERENCE ONLY (see sections/.layout_hint.md).")
+        print("Copying /base/ (ground-truth facts) into sections/; rewrite bullets from base, mirroring the referenced layout.")
+        print("Do NOT copy bullet text from the archive — it may carry ungrounded claims (Rule 9).")
+        _copy_base_into_sections()
+        write_layout_hint(best_match, best_score)
+        print("Done. Workspace bootstrapped from base with a layout reference.")
+
     else:
         print(f"🧹 TIER 3 MATCH (< {threshold_good:.0%}): LOW overlap.")
         print("Starting with a fresh slate from immutable base files ('base/').")
@@ -251,13 +314,17 @@ def archive_sections(name, jd_path=None):
     for f in os.listdir(SECTIONS_DIR):
         if f.endswith(".tex"):
             shutil.copy(os.path.join(SECTIONS_DIR, f), os.path.join(archive_dest, f))
-            
-    # 2. Extract keywords for registry — only from the JD to avoid LaTeX noise
+
+    # 2. Extract keywords for registry — only from the JD to avoid LaTeX noise.
+    #    Also persist the JD inside the archive folder so registry.json can always be
+    #    rebuilt from folders alone (see rebuild_registry / `make sync-registry`).
     keywords = []
     if jd_path and os.path.exists(jd_path):
         with open(jd_path, 'r') as f:
             jd_content = f.read()
         keywords = extract_keywords(jd_content)
+        with open(os.path.join(archive_dest, "jd.txt"), 'w') as f:
+            f.write(jd_content)
     # No fallback: parsing .tex files produces LaTeX syntax noise (textbf, itemize, etc.)
     # If no JD provided, keywords remain empty and the entry will be skipped during similarity matching
             
@@ -270,6 +337,151 @@ def archive_sections(name, jd_path=None):
     save_registry(registry)
     print(f"Successfully archived current state to 'archive/{name}/' with {len(keywords)} registered keywords.")
 
+def rebuild_registry():
+    """Rebuild registry.json from the archive folders so it can never silently drift.
+
+    For each archive/<name>/ folder, keywords are sourced in priority order:
+      1. archive/<name>/jd.txt          (authoritative — how new archives are stored)
+      2. an existing registry entry     (preserve keywords for legacy folders)
+      3. archived .tex fallback (noisy)  (last resort so no folder is left unregistered)
+    """
+    existing = load_registry()
+    rebuilt = {}
+    if not os.path.isdir(ARCHIVE_DIR):
+        print("No archive directory found; nothing to rebuild.")
+        return
+
+    for name in sorted(os.listdir(ARCHIVE_DIR)):
+        folder = os.path.join(ARCHIVE_DIR, name)
+        if not os.path.isdir(folder):
+            continue
+
+        jd_file = os.path.join(folder, "jd.txt")
+        if os.path.exists(jd_file):
+            with open(jd_file) as f:
+                keywords = extract_keywords(f.read())
+            source = "jd.txt"
+        elif name in existing and existing[name].get("keywords"):
+            keywords = existing[name]["keywords"]
+            source = "existing entry (no jd.txt)"
+        else:
+            blob = ""
+            for f in os.listdir(folder):
+                if f.endswith(".tex"):
+                    with open(os.path.join(folder, f)) as fh:
+                        blob += " " + strip_latex(fh.read())
+            keywords = extract_keywords(blob)
+            source = ".tex fallback (noisy — add a jd.txt to fix)"
+
+        rebuilt[name] = {"keywords": keywords, "sections_source": f"archive/{name}/"}
+        print(f"  {name}: {len(keywords)} keywords [{source}]")
+
+    save_registry(rebuilt)
+    print(f"Rebuilt registry.json with {len(rebuilt)} entries.")
+
+# --- Line-density lint -------------------------------------------------------
+# Character thresholds calibrated to the resume's text width (see CLAUDE.md §3).
+LINT_SINGLE_MAX = 95    # a dense single line
+LINT_DENSE_MIN2 = 150   # a two-liner must be at least this full to earn its 2nd line
+LINT_DOUBLE_MAX = 190   # beyond this wraps to a 3rd line
+
+def _visible_len(item_body):
+    r"""Approximate the rendered width of a \resumeItem body: strip LaTeX commands and
+    braces but KEEP the text they wrap (e.g. \textbf{60.6M+} -> 60.6M+)."""
+    s = re.sub(r'\\href\{[^}]*\}', '', item_body)   # drop the URL argument of \href
+    s = re.sub(r'\\[a-zA-Z]+\*?', '', s)            # drop \commands (textbf, emph, small, ...)
+    s = re.sub(r'\\([&%$#_])', r'\1', s)            # unescape \& \% \$ \# \_ to one char
+    s = s.replace('{', '').replace('}', '').replace('$', '').replace('~', ' ')
+    return len(re.sub(r'\s+', ' ', s).strip())
+
+MIN_ENTRY_BULLETS = 3   # non-project entries must carry at least this many bullets
+
+def _entry_bullet_counts(content):
+    r"""Return [(label, bullet_count)] per top-level entry (\resumeSubheading boundary).
+    Bullets under \resumeSubSubheading stay grouped with their parent entry."""
+    markers = list(re.finditer(r'\\resumeSubheading', content))
+    out = []
+    for idx, m in enumerate(markers):
+        end = markers[idx + 1].start() if idx + 1 < len(markers) else len(content)
+        chunk = content[m.start():end]
+        lm = re.search(r'\{([^{}]+)\}', chunk)
+        label = re.sub(r'\\[a-zA-Z]+\*?', '', lm.group(1)).strip() if lm else "(entry)"
+        out.append((label, len(re.findall(r'\\resumeItem\{', chunk))))
+    return out
+
+def _iter_resume_items(content):
+    r"""Yield the brace-balanced body of each \resumeItem{...} (handles nested \textbf{})."""
+    token = r'\resumeItem{'
+    idx = 0
+    while True:
+        pos = content.find(token, idx)
+        if pos == -1:
+            return
+        i = start = pos + len(token)
+        depth = 1
+        while i < len(content) and depth:
+            depth += (content[i] == '{') - (content[i] == '}')
+            i += 1
+        yield content[start:i - 1]
+        idx = i
+
+def lint_density():
+    r"""Flag bullets that waste vertical space. A bullet just over one line wraps to a
+    nearly-empty second line — that whitespace could hold another bullet or entry. Each
+    bullet should be a dense single line (<= LINT_SINGLE_MAX) or a full two-liner
+    (LINT_DENSE_MIN2..LINT_DOUBLE_MAX). See CLAUDE.md section 3. Returns nonzero if issues."""
+    # Only the bulleted sections main.tex actually renders on the 1-page resume.
+    # (leadership/conferences are omitted, so their bullets don't affect layout.)
+    rendered = ["experience", "research", "projects"]
+    files = [f"{n}.tex" for n in rendered if os.path.exists(os.path.join(SECTIONS_DIR, f"{n}.tex"))]
+
+    waste = toolong = total = 0
+    for fname in files:
+        with open(os.path.join(SECTIONS_DIR, fname)) as fh:
+            content = fh.read()
+        header_printed = False
+        for body in _iter_resume_items(content):
+            total += 1
+            n = _visible_len(body)
+            if n <= LINT_SINGLE_MAX or LINT_DENSE_MIN2 <= n <= LINT_DOUBLE_MAX:
+                continue  # dense single line, or full two-liner — both fine
+            if n < LINT_DENSE_MIN2:
+                msg = f"STUB 2nd line ({n} chars) -> trim to <={LINT_SINGLE_MAX} OR expand to >={LINT_DENSE_MIN2}"
+                waste += 1
+            else:
+                msg = f"TOO LONG ({n} chars) -> wraps to 3 lines, trim below {LINT_DOUBLE_MAX}"
+                toolong += 1
+            if not header_printed:
+                print(f"\n[{fname[:-4]}]")
+                header_printed = True
+            preview = re.sub(r'\s+', ' ', body)[:64]
+            print(f"  WARN {msg}\n       \"{preview}...\"")
+
+    # Entry minimum: non-project entries (experience, research) must not be left "light".
+    # Projects are exempt — they are the trim buffer (2/1/0 bullets, header-only is fine).
+    light = 0
+    for fname in ("experience.tex", "research.tex"):
+        path = os.path.join(SECTIONS_DIR, fname)
+        if not os.path.exists(path):
+            continue
+        header_printed = False
+        for label, cnt in _entry_bullet_counts(open(path).read()):
+            if cnt < MIN_ENTRY_BULLETS:
+                if not header_printed:
+                    print(f"\n[{fname[:-4]} — entry density]")
+                    header_printed = True
+                print(f"  WARN '{label}' has {cnt} bullet(s) (<{MIN_ENTRY_BULLETS}) -> add grounded "
+                      f"bullets from /base/, or drop the entry (don't ship a light entry).")
+                light += 1
+
+    print(f"\nLine-density: {total} bullets | {waste} waste-zone | {toolong} too-long | {light} light entries.")
+    if waste or toolong or light:
+        print("Fix: right-size each flagged bullet (shorten, or split & fill from /base/), and give")
+        print(f"every experience/research entry >={MIN_ENTRY_BULLETS} bullets or drop it. No fabrication.")
+        return 1
+    print("OK: bullets are dense, and every non-project entry carries its weight.")
+    return 0
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Resume Semantic Cache & Bootstrap Manager")
     subparsers = parser.add_argument_group("actions")
@@ -277,10 +489,18 @@ if __name__ == "__main__":
     parser.add_argument("--bootstrap", help="Path to Job Description file to bootstrap sections/", type=str)
     parser.add_argument("--archive", help="Name to archive current sections/ to", type=str)
     parser.add_argument("--jd", help="Path to JD for keyword extraction (use with --archive)", type=str)
-    
+    parser.add_argument("--rebuild-registry", action="store_true",
+                        help="Regenerate registry.json from the archive folders (self-heal drift)")
+    parser.add_argument("--lint-density", action="store_true",
+                        help="Flag bullets in the stub-line waste zone (see CLAUDE.md section 3)")
+
     args = parser.parse_args()
-    
-    if args.bootstrap:
+
+    if args.lint_density:
+        sys.exit(lint_density())
+    elif args.rebuild_registry:
+        rebuild_registry()
+    elif args.bootstrap:
         bootstrap(args.bootstrap)
     elif args.archive:
         archive_sections(args.archive, args.jd)
