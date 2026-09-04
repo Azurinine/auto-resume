@@ -1,0 +1,23 @@
+PayPal — Software Engineer Intern (Summer 2027)
+
+Software Engineer Interns at PayPal develop innovative solutions and high-quality products that touch millions of people every day. Our engineers solve some of the most complex technical challenges in connected payments across multiple business units, including PayPal, Braintree, Venmo, and Paydiant. We are looking for candidates with exceptional technical talent, strong programming skills, and a keen desire to deeply understand our products and services while advancing our technology across functionality, performance, reliability, and scalability.
+
+As a Software Engineer Intern, you will estimate engineering efforts, design and implement solutions, test and deploy your changes, and help triage production issues. We build new experiences, improve existing products, and develop distributed systems that power some of the world's largest e-commerce and payments websites at a scale few companies can match.
+
+Essential Responsibilities:
+* Develop, test, debug, and maintain scalable front-end and back-end software using technologies such as Java, Python, Node.js, React, SQL, and REST APIs.
+* Write clean, maintainable code; develop and optimize databases; and ensure data integrity and system performance.
+* Follow software development life cycle (SDLC) processes, internal standards, coding conventions, and best practices while making technical decisions with appropriate guidance.
+* Collaborate with managers, project leads, peers, and cross-functional partners—including design, product, and other business teams—to understand requirements and deliver effective solutions.
+* Participate in code and design reviews and contribute to improving coding standards and development practices.
+
+Minimum Qualifications:
+* Experience with at least one programming language, such as Java, Python, C++, JavaScript, or similar.
+* Familiarity with software development concepts, including data structures, algorithms, object-oriented programming, and debugging.
+* Experience developing projects through coursework, internships, research, or personal projects.
+* Strong problem-solving, communication, collaboration, and analytical skills.
+
+Internship Program Requirements:
+* This is a Summer 2027 Internship program. Spring and Fall 2027 internships are not available.
+* Currently pursuing a bachelor's or master's degree in computer science, software engineering, or a related technical field.
+* Must be returning to school in Fall 2027.

@@ -1,0 +1,25 @@
+Audible — Software Development Engineer (SDE)
+
+As a Software Development Engineer, you will...
+- Develop, test, and maintain software components and applications for the world's largest audiobook creator and provider
+- Identify and resolve software defects through code review, log analysis, metrics examination, debugging, and other troubleshooting methods
+- Write maintainable and scalable code for software components as part of an agile engineering team
+- Collaborate with stakeholders to envision, design, develop, test, and launch customer-centric software that inspires and impacts users
+- Apply computer science, engineering, and analysis principles to solve moderate-scale problems
+- Continuously enhance testability, operational excellence (OE), and documentation for owned software components
+- Handle data classification, storage, and management in accordance with company policies
+- Participate in the interview process and provide mentorship to fellow engineers
+
+Basic Qualifications
+- Experience with at least one general-purpose programming language such as Java, Python, C++, C#, Go, Rust, or TypeScript
+- Experience with data structure implementation, basic algorithm development, and/or object-oriented design principles
+- Currently enrolled in a Bachelor's degree or above in Computer Science, Computer Engineering, Data Science, Information Systems, or related STEM fields OR completed a Bachelor's or Graduate degree in specified fields
+- Must be 18 years of age or older
+
+Preferred Qualifications
+- Experience from previous technical internship(s) or demonstrated project experience
+- Experience with one or more of the following: AI tools for development productivity, Cloud platforms (preferably AWS), Database systems (SQL and NoSQL), Contributing to open-source projects, Version control systems, Debugging and troubleshooting complex systems
+- Demonstrated ability to learn and adapt to new technologies quickly
+- Basic understanding of software development lifecycle (SDLC)
+- Strong problem-solving and analytical skills
+- Excellent written and verbal communication skills

@@ -1,0 +1,24 @@
+Stoke Space — Software Engineering Intern, Boltline (Summer 2027, onsite Kent WA)
+
+Stoke is building Nova, a fully and rapidly reusable launch vehicle. As an intern you will work on real, open-ended problems, work closely with a mentor, and grow through high-impact projects. You must be ready to stay focused, move fast, self-direct, and learn on the fly.
+
+General Qualifications:
+* Pursuing Bachelor's or Master's degree in a STEM field (computer engineering, computer science, or similar)
+* Project-level experience with Python, C, or Rust
+* Exceptional command of engineering fundamentals
+* Hands-on engineering experience through internships, personal projects, work, or teams
+* Ability to manage a complex technical project and take it through execution
+* Ability to learn and apply state of the art techniques to technical projects
+* Excellent written and verbal communication
+* Able to work full-time, onsite for a minimum of 10-14 consecutive weeks starting in May 2027
+
+Boltline Team:
+As a Software Engineering Intern on the Boltline by Stoke Space Team, you will be working on our web-based SaaS that helps advanced hardware manufacturing teams design, track, iterate, build and test in a fast and reliable manner. You will contribute to the full software lifecycle, including design, implementation, testing, and deployment, in a fast-paced and iterative development environment.
+
+Required qualifications:
+* Proficient in JavaScript or TypeScript
+* Experience in front-end or back-end software development
+
+Preferred qualifications:
+* Experience in 1 or more of the technologies utilized in our tech stack: TypeScript, React, Next.js, Apollo, Express.js, Node.js, GraphQL, PostgreSQL, AWS
+* Affinity for full-stack software development
