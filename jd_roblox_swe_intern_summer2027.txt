@@ -1,0 +1,17 @@
+Roblox — Software Engineer Intern (12-week Summer Internship)
+Location: San Mateo, CA.
+
+About the role
+End-to-end ownership of a production-scale project tackling hard technical challenges including distributed systems, real-time communication, 3D co-experience, data processing, rendering, and more. Dedicated mentorship; deliver live production projects.
+
+You Will
+- Deliver live production projects with dedicated mentorship.
+- Investigate and experiment with cutting-edge technologies such as machine learning frameworks, agentic coding tools, and large language models (LLMs) to solve complex technical challenges and improve engineering systems.
+- Own a project beginning to end: coding, testing, deploying to production, and presenting to peers and leaders.
+- Partner with cross-functional teams (Design, Product, Data, QA, DevOps) to deliver cohesive products and features.
+- Explore teams across Roblox including Infra, Engine, Search and Discovery, Foundational AI, and Economy.
+
+You Are
+- Pursuing an undergraduate or graduate degree in computer science, engineering, or a related field.
+- Working toward proficiency or proficient in one or more programming languages, including Go, Node.js, Ruby, Python, C++, Lua, Swift, C#, and Java.
+- A curious collaborator, excited to learn, open to feedback, and eager to solve the hardest technical challenges.

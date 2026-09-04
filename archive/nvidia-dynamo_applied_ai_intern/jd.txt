@@ -1,0 +1,23 @@
+NVIDIA — Applied AI Research Software Engineering Intern (Dynamo project)
+
+About Dynamo
+NVIDIA Dynamo is an open-source platform for efficient, scalable inference for large language and reasoning models in distributed GPU environments — serving architecture, GPU resource management, intelligent request handling. Challenges include the Dynamo k8s serving platform, disaggregated serving, dynamic GPU scheduling, intelligent routing, and distributed KV cache management.
+
+What you'll be doing
+- Collaborate on the design and development of the Dynamo Kubernetes stack.
+- Add features to the Dynamo Python SDK and Dynamo Rust Runtime Core Library; design, implement, and optimize distributed inference components in Rust and Python.
+- Contribute to disaggregated serving for inference engines (vLLM, SGLang, TRT-LLM, llama.cpp, mistral.rs).
+- Improve intelligent routing and KV-cache management subsystems.
+- Contribute to open-source repositories, participate in code reviews, issue triage on GitHub, and evolve the framework's APIs and architecture.
+
+What We Need To See
+- Pursuing BS, MS, or PhD in Computer Science or equivalent.
+- Excellent Golang, Rust and/or Python programming and software design skills, including debugging, performance and service health analysis, and test design.
+- Good understanding of algorithms and data structures; solid knowledge of RESTful APIs.
+- Highly motivated and curious; excellent communication, planning, and problem solving skills.
+
+Ways To Stand Out
+- Understanding of machine learning or NLP concepts.
+- Experience in software shipping cycles (dev, deploy, release, CI) and open-source software development.
+- Experience with inference engines such as vLLM, SGLang, TensorRT-LLM.
+- Experience building and deploying containers in Kubernetes environments.

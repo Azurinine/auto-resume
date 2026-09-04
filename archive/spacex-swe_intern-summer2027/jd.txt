@@ -1,0 +1,24 @@
+SpaceX — Summer 2027 Software Engineering Internship / Co-op
+Locations: Bastrop TX; Brownsville TX; Cape Canaveral FL; Hawthorne (LA) CA; Irvine CA; McGregor (Waco) TX; Palo Alto CA; Redmond (Seattle) WA.
+
+About the role
+Software engineering intern working closely with a mentor on high-impact projects. Aerospace experience is NOT required — SpaceX looks for smart, motivated, collaborative engineers who love solving problems and want to apply their knowledge outside the classroom.
+
+Basic Qualifications
+- Must be enrolled in a bachelor's degree or graduate program.
+- 3+ months of software programming or development experience.
+- Software coding experience in one or more of: C, C++, C#, Java, JavaScript, Python.
+- Must be a U.S. citizen/national, lawful permanent resident, refugee, or asylee (ITAR).
+
+Preferred Skills and Experience
+- GPA of 3.5 or above.
+- 6+ months experience developing and deploying software used on real-world applications and projects.
+- Strong fundamental knowledge of computer architecture and networks.
+- Experience with software documentation, creating system diagrams, and enumerating software requirements.
+- Strong skills in debugging, performance optimization, and unit testing.
+- Strong interpersonal skills (examples: leading a student organization or working successfully in teams).
+- Ability to work effectively in a dynamic environment with changing needs and requirements.
+- Ability to work independently and in a team, take initiative, and communicate effectively.
+
+Additional Requirements
+- Full-time, onsite for a minimum of 12 consecutive weeks beginning May or June 2027.

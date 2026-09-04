@@ -1,0 +1,18 @@
+SpaceX seeks extraordinary students to join us for software engineering roles in Summer 2027. As a software intern, you will work closely with your mentor and other employees who will help you apply your knowledge and grow your skills on projects that have a significant impact. Aerospace experience is not required - we look for smart, motivated, collaborative engineers who love solving problems and want to make an impact.
+
+BASIC QUALIFICATIONS:
+* Must be enrolled in a bachelor's degree or graduate program
+* 3+ months of software programming or development experience
+* Software coding experience in one or more of the following: C, C++, C#, Java, JavaScript, Python
+
+PREFERRED SKILLS AND EXPERIENCE:
+* GPA of 3.5 or above
+* 6+ months experience developing and deploying software that has been used on real-world applications and projects
+* Strong fundamental knowledge of computer architecture and networks
+* Experience with software documentation, creating system diagrams, and enumerating software requirements
+* Strong skills in debugging, performance optimization and unit testing
+* Strong interpersonal skills (examples: leading a student organization or working successfully in teams)
+* Ability to work effectively in a dynamic environment with changing needs and requirements
+* Ability to work independently and in a team, take initiative, and communicate effectively
+
+PROGRAM: Dragon, Falcon, Starship vehicles; Starlink satellite constellation, Starshield, SpaceXAI (Grok, Starmind). Design, build, test, and operate all parts of the system including satellites, consumer receivers, and the software that brings it all together. High-performance AI compute.

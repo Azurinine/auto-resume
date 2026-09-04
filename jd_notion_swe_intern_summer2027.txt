@@ -1,0 +1,17 @@
+Notion — Software Engineer Intern (Summer 2027, NY or SF)
+
+Notion is the collaborative AI workspace where teams and agents think together. We're building one place where your knowledge, projects, meetings, and AI tools live side by side, so work is faster, clearer, and less fragmented. Millions of individuals, small teams, and large companies run their work on Notion.
+
+This internship will take place from May 17 - August 6 or June 14 - Sept 3 (based on your summer schedule) and you will need to be able to work out of our NY or SF office during this time.
+
+About The Role:
+- Thoughtful problem-solving: problem-solving starts with a clear and accurate understanding of the context. You can decompose tricky problems and work towards a clean solution, by yourself or with teammates.
+- Put users first: You think critically about the implications of what you're building, and how it shapes real people's lives.
+- Not ideological about technology: technologies and programming languages are about tradeoffs. You can learn new technologies as you go.
+- Empathetic communication: You communicate nuanced ideas clearly, whether explaining technical decisions in writing or brainstorming in real time.
+- Team player: You enjoy collaborating cross-functionally to accomplish shared goals.
+
+What You'll Achieve:
+- Write clean, secure, tested, and documented code.
+- Design & enhance the Notion product with new capabilities with an AI first mindset.
+- Develop, fix and debug software across our full stack: web services, databases, applications, tools while leveraging modern frameworks and tooling.

@@ -1,0 +1,20 @@
+Hudson River Trading (HRT) — Software Engineering Summer Internship
+Full-time summer internship. Algorithmic trading technology firm.
+
+About
+HRT brings together sharp minds across quantitative disciplines within a world-class computing environment to rapidly scale solutions to the toughest problems in tech and trading. Software engineers create and maintain the technology and infrastructure integral to trading. Ideal candidates are smart programmers who love to code, are eager to learn, and thrive in an entrepreneurial environment.
+
+What to Expect
+- A hands-on introduction to all technical facets of software engineering in the algorithmic trading industry.
+- Independent programming projects in Python, C, or C++, depending on project needs.
+- Structured, hands-on training with quick transition into real projects within the first week.
+- Learn about HRT's research and trading infrastructure.
+- Technical project work and mentorship.
+
+Qualifications
+- Full-time undergraduate student studying computer science or a related field.
+- Programming experience in Python, C or C++ is required.
+- A passion for technology and writing code that is elegant, readable, and efficient.
+- Exceptional problem solving skills.
+- Strong communication skills.
+- Knowledge of trading and/or financial markets is NOT required for this position.

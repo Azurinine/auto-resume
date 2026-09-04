@@ -1,0 +1,30 @@
+Fall Software Development Engineer (SDE) internship — Amazon Web Services (AWS) Data Services organization. Start dates Aug/Sept 2026, 12 weeks.
+
+AWS operates some of the world's most widely used database, storage, and analytics services. Our engineers solve challenges across distributed systems, query processing, storage engines, and data platforms at massive scale.
+
+SDE interns use modern technology to solve complex problems while seeing their work's impact first-hand. Influence millions of customers, sellers, and products globally. Creating new products, features, and services while managing ambiguity in an environment where development cycles are measured in weeks, not years. Ownership at every level: own the entire lifecycle of your code - from design through deployment and ongoing operations. Operational excellence.
+
+Key job responsibilities
+- Collaborate and communicate effectively with experienced cross-disciplinary Amazonians to design, build, and operate innovative products and services that delight our customers, while participating in technical discussions to drive solutions forward.
+- Design and develop scalable solutions using cloud-native architectures and microservices in a large distributed computing environment.
+- Participate in code reviews and contribute to technical documentation.
+- Build and maintain resilient distributed systems that are scalable, fault-tolerant, and cost-effective.
+- Leverage and contribute to the development of GenAI and AI-powered tools to enhance development productivity while staying current with emerging technologies.
+- Write clean, maintainable code following best practices and design patterns.
+- Work in an agile environment practicing CI/CD principles while participating in operational responsibilities.
+- Demonstrate operational excellence through monitoring, troubleshooting, and resolving production issues.
+
+Basic Qualifications
+- Experience with at least one general-purpose programming language such as Java, Python, C++, C#, Go, Rust, or TypeScript
+- Experience with data structure implementation, basic algorithm development, and/or object-oriented design principles
+- Enrolled in a Bachelor's degree or above in Computer Science, Computer Engineering, Data Science, Information Systems, or related STEM fields
+- Able to work 40 hours/week and commit to a 12-week internship
+- Expected conferral date between January 2027 - December 2029
+
+Preferred Qualifications
+- Experience from previous technical internship(s) or demonstrated project experience
+- Experience with one or more of the following: AI tools for development productivity, Cloud platforms (preferably AWS), Database systems (SQL and NoSQL), Contributing to open-source projects, Version control systems, Debugging and troubleshooting complex systems
+- Demonstrated ability to learn and adapt to new technologies quickly
+- Basic understanding of software development lifecycle (SDLC)
+- Strong problem-solving and analytical skills
+- Excellent written and verbal communication skills

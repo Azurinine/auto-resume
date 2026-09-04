@@ -1,0 +1,31 @@
+JPMorganChase — Early Careers Software Engineer (Software Engineer Program)
+Full-time, 2-year development program. Start: July 2027.
+Locations: Chicago, Columbus, Houston, Jersey City, NY Metro, Palo Alto, Plano, Tampa, Wilmington.
+
+About
+A global two-year development experience with structured learning, mentorship, and hands-on project work in a modern engineering environment. Contribute to high-impact technology projects.
+
+Job Responsibilities
+- Design, develop, test, and troubleshoot software solutions.
+- Communicate clearly in writing and verbally: articulate problems, document solutions, and effectively prompt approved AI-assisted development tools to produce high-quality outputs.
+- Collaborate with engineers, managers, and stakeholders across teams to understand problems, share feedback, and deliver reliable solutions.
+- Leverage approved AI development tools (code generation, refactoring, test creation, documentation) to improve code quality and productivity, while validating outputs through peer review, automated testing, and secure coding practices.
+- Apply automation and modern tooling across the Software Development Life Cycle (SDLC), including AI-enabled capabilities, to improve delivery efficiency and reliability.
+
+Required Qualifications
+- Bachelor's degree or 5th-year Master's, expected graduation between July 2026 and June 2027; graduated by June 2027; available to start full-time July 2027.
+- Streams/specializations in Computer Science, Information Science, Information Technology, Data Science, Artificial Intelligence, Big Data, or related field.
+- Experience designing, developing, testing, and troubleshooting software solutions as part of an engineering team.
+- Proficiency writing secure, high-quality code in at least one programming language, following established standards and best practices.
+- Apply automation and modern tooling to reduce manual effort and improve consistency across the SDLC.
+- Use approved AI development tools (code drafting, refactoring, testing, documentation) with appropriate review and validation.
+- Critically evaluate AI-generated outputs and remain accountable for final solution quality and correctness.
+- Strong written and verbal communication; articulate technical concepts, document work, collaborate across teams.
+
+Preferred Qualifications
+- Foundational understanding of software engineering concepts through coursework, projects, or internships.
+- Apply SWE skills to open-ended or ambiguous problems: break work into steps, experiment, iterate on feedback.
+- Use AI development tools to improve efficiency (coding, testing, debugging, documentation).
+- Sound judgment validating AI-generated outputs; ownership of quality, correctness, and security.
+- Curiosity about emerging technologies.
+- Build, improve, and deliver technology that creates real-world impact.

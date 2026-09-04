@@ -1,0 +1,26 @@
+Software Engineering Intern — Samsara (NYSE: IOT)
+Location: San Francisco, CA (hybrid, 3 days/week)
+
+About Samsara
+Samsara is the pioneer of the Connected Operations Cloud, a platform that enables organizations that depend on physical operations to harness Internet of Things (IoT) data to develop actionable insights and improve their operations — across agriculture, construction, field services, transportation, and manufacturing. Product areas include Video-Based Safety, Vehicle Telematics, Apps and Driver Workflows, and Equipment Monitoring.
+
+About the role
+Interns work on high-impact engineering challenges across the connected operations platform. Depending on the team, an intern may:
+- Build the backend infrastructure that powers the IoT platform, scaling data ingestion and storage systems that support over 15,000 hardware assets and tens of thousands of customers worldwide.
+- Work across the full stack, creating intuitive user experiences that turn data into actionable insights, partnering with product and design to rapidly iterate on features.
+- Strengthen the infrastructure behind the React Native mobile app, enabling feature teams to build performant, maintainable products.
+- Work on embedded software running on Samsara hardware, spanning edge AI, multimedia frameworks, power management, and real-time data processing in demanding real-world environments.
+
+Tech stack: engineering teams use Golang for backend, TypeScript and React for the web client, GraphQL for data access, and React Native for mobile. Direct experience with this exact stack is not required, but experience with similar technologies is strongly encouraged.
+
+You should apply if:
+- You want to build for scale — technology that powers physical operations at a scale most engineers never experience.
+- You're curious and self-driven — hackathons, side projects, tearing apart how things work.
+- You're drawn to hard problems and own them end to end — dig into complexity, find the simplest solution that works.
+- You're AI-forward — you've woven AI into how you work (accelerating debugging, drafting code, exploring problem spaces faster).
+- You're a collaborator across cross-functional teams.
+
+Minimum requirements
+- Currently a junior-year student on track to complete a Bachelor's degree in Computer Science, Mathematics, Software Engineering, Physics, or Data Science between Spring/Summer/Fall 2028 or Winter 2029.
+- Hybrid: 3 days per week in the San Francisco, CA office.
+- Full-time, paid; interns are not enrolled in school full-time while working.

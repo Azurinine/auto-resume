@@ -1,0 +1,28 @@
+Software Engineering Intern — AI and ML projects (CoreAI)
+Company: Microsoft
+Target start: Summer 2027
+
+Overview
+CoreAI's objective is to empower everyone to shape the future with AI. For developers, this means using AI-powered tools and agents to transform the entire software development lifecycle. For organizations, this means moving beyond first-generation AI applications into dynamic, agentic applications designed from the ground up to act on their behalf with intelligence, memory, adaptability, and security at their core. CoreAI is building a complete set of AI-powered developer tools on top of a full-stack AI app and agent factory, with security and trust baked in, reaching from the cloud to the edge.
+
+As a Software Engineering Intern on AI and ML projects, you will work with teammates to solve problems and build innovative software solutions that leverage AI technologies, provide technical guidance to Technical Program Managers and Product Managers, learn and adopt relevant new AI technologies, and apply Microsoft's responsible AI practices. You will design, develop, and test next-generation software.
+
+Responsibilities
+- Apply engineering principles and AI techniques to solve complex problems through sound and creative engineering.
+- Work with appropriate stakeholders to determine user requirements for a feature.
+- Understand and apply Microsoft's responsible AI practices.
+- Quickly learn new engineering methods and emerging AI and machine learning techniques and incorporate them into work processes.
+- Seek feedback and apply internal or industry best practices to improve technical solutions.
+- Demonstrate time management and complete software projects in a cooperative team environment.
+- Improve the availability, reliability, efficiency, observability, and performance of products, driving consistency in monitoring and operations at scale.
+
+Required Qualifications
+- Currently pursuing a Bachelor's Degree in Computer Science or related technical field with at least one semester/term remaining following the completion of the internship,
+- OR currently pursuing a Master's Degree in Computer Science or related technical field with at least one semester/term remaining following the completion of the internship.
+
+Preferred Qualifications
+- One year of programming experience in an object-oriented language.
+- Understanding of computer science fundamentals, including data structures and algorithms and AI/machine learning concepts.
+- Experience with AI/ML projects, such as developing machine learning models, working with large datasets, or implementing AI solutions in real-world applications.
+- Familiarity with AI frameworks and libraries like TensorFlow, PyTorch, or scikit-learn.
+- Experience using AI tools such as GitHub Copilot, Claude Code, and Microsoft Roo Code, with an understanding of their strengths and limitations.

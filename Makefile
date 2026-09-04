@@ -5,18 +5,21 @@ JD ?=
 
 all:
 	latexmk -pdf -output-directory=output main.tex
-	mv output/main.pdf output/$(NAME).pdf
-	latexmk -c -output-directory=output
-	@echo "Generated: output/$(NAME).pdf"
-	@# Rule 5 guard: refuse to archive a resume that overflows one page.
-	@pages=$$(mdls -name kMDItemNumberOfPages -raw "output/$(NAME).pdf" 2>/dev/null); \
-	case "$$pages" in ''|*[!0-9]*) pages=$$(python3 -c "from pypdf import PdfReader; print(len(PdfReader('output/$(NAME).pdf').pages))" 2>/dev/null || pdfinfo "output/$(NAME).pdf" 2>/dev/null | awk '/^Pages:/{print $$2}');; esac; \
+	@# Rule 5 guard: read the TRUE page count from LaTeX's own log (authoritative and
+	@# dependency-free) BEFORE cleaning aux files, and guard BEFORE archiving. Do NOT trust
+	@# Spotlight/mdls -- its cache can be stale right after a rebuild and wrongly pass a 2-page PDF.
+	@pages=$$(sed -n 's/.*Output written on .*(\([0-9][0-9]*\) pages\{0,1\}.*/\1/p' output/main.log 2>/dev/null | tail -1); \
+	if [ -z "$$pages" ]; then pages=$$(pdfinfo output/main.pdf 2>/dev/null | awk '/^Pages:/{print $$2}'); fi; \
 	echo "Page count: $${pages:-unknown}"; \
 	if [ -n "$$pages" ] && [ "$$pages" -gt 1 ] 2>/dev/null; then \
-		echo "ERROR: output/$(NAME).pdf is $$pages pages. Rule 5 requires exactly 1 page."; \
+		echo "ERROR: build is $$pages pages. Rule 5 requires exactly 1 page."; \
 		echo "       Trim sections/ (compress-before-drop) and rebuild. NOT archiving a failed build."; \
+		rm -f output/main.pdf; latexmk -c -output-directory=output >/dev/null 2>&1; \
 		exit 1; \
 	fi; \
+	mv output/main.pdf output/$(NAME).pdf; \
+	latexmk -c -output-directory=output >/dev/null 2>&1; \
+	echo "Generated: output/$(NAME).pdf"; \
 	if [ -n "$(JD)" ] && [ -f "$(JD)" ]; then \
 		python3 tailor_bootstrap.py --archive $(NAME) --jd $(JD); \
 	elif [ -n "$(JD)" ]; then \

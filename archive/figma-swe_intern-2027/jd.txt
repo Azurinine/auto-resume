@@ -1,0 +1,27 @@
+Figma — Software Engineering Intern
+Location: San Francisco or New York Hub. Start date: January 4, 2027.
+
+About
+Figma's platform helps teams bring ideas to life — brainstorming, prototyping, translating designs into code, iterating with AI — enabling teams to streamline workflows, move faster, and work together in real time from anywhere.
+
+Interns are embedded into small, collaborative engineering teams. Work closely with a mentor and teammates to ship meaningful features, tools, or systems. Whether internal infrastructure or user-facing features, learn, contribute, and grow.
+
+Engineering Interests (you share which areas you're most excited about):
+1. Product: Build full-stack user-facing features — new collaboration tools, product workflows, growth experiments.
+2. Platform/Infrastructure: Build platform-level tools — distributed systems, developer tooling, performance/scalability work.
+3. Security Engineering: Security-focused systems, product security tooling, detection, secure infrastructure, privacy/security features.
+4. Open: flexible and exploring.
+
+What you'll do
+- Be fully embedded onto a Figma engineering team.
+- Contribute to projects aligned with team goals and impact.
+- Collaborate with engineers, PMs, designers, and QA to break down features and plan timelines.
+- Build, document, and maintain tests, features, or infrastructure.
+- Share feedback and participate in peer code review.
+- Ship your project(s) by the end of your internship.
+
+We'd love to hear from you if you have
+- Experience writing clean code in at least one general-purpose language (e.g. C++, JavaScript, Python, Java, etc.), with a solid grasp of core CS concepts like data structures and algorithms.
+- Experience solving technical problems through school, work, or personal projects.
+- Excited to explore how systems are designed and operate, from infrastructure to UI.
+- Strong communicator who asks great questions, collaborates well, and is excited to learn and grow.

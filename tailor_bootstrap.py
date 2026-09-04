@@ -382,6 +382,7 @@ def rebuild_registry():
 # --- Line-density lint -------------------------------------------------------
 # Character thresholds calibrated to the resume's text width (see CLAUDE.md §3).
 LINT_SINGLE_MAX = 95    # a dense single line
+LINT_SINGLE_MIN = 65    # below this a single line leaves noticeable trailing whitespace (advisory)
 LINT_DENSE_MIN2 = 150   # a two-liner must be at least this full to earn its 2nd line
 LINT_DOUBLE_MAX = 190   # beyond this wraps to a 3rd line
 
@@ -435,7 +436,7 @@ def lint_density():
     rendered = ["experience", "research", "projects"]
     files = [f"{n}.tex" for n in rendered if os.path.exists(os.path.join(SECTIONS_DIR, f"{n}.tex"))]
 
-    waste = toolong = total = 0
+    waste = toolong = short = total = 0
     for fname in files:
         with open(os.path.join(SECTIONS_DIR, fname)) as fh:
             content = fh.read()
@@ -443,19 +444,25 @@ def lint_density():
         for body in _iter_resume_items(content):
             total += 1
             n = _visible_len(body)
-            if n <= LINT_SINGLE_MAX or LINT_DENSE_MIN2 <= n <= LINT_DOUBLE_MAX:
+            if LINT_SINGLE_MIN <= n <= LINT_SINGLE_MAX or LINT_DENSE_MIN2 <= n <= LINT_DOUBLE_MAX:
                 continue  # dense single line, or full two-liner — both fine
-            if n < LINT_DENSE_MIN2:
+            if n < LINT_SINGLE_MIN:
+                tag, label = "short", "INFO"
+                msg = f"UNDERFILLED ({n} chars) -> advisory: grow toward {LINT_SINGLE_MAX} with a grounded detail to reduce trailing whitespace"
+                short += 1
+            elif n < LINT_DENSE_MIN2:
+                tag, label = "waste", "WARN"
                 msg = f"STUB 2nd line ({n} chars) -> trim to <={LINT_SINGLE_MAX} OR expand to >={LINT_DENSE_MIN2}"
                 waste += 1
             else:
+                tag, label = "toolong", "WARN"
                 msg = f"TOO LONG ({n} chars) -> wraps to 3 lines, trim below {LINT_DOUBLE_MAX}"
                 toolong += 1
             if not header_printed:
                 print(f"\n[{fname[:-4]}]")
                 header_printed = True
             preview = re.sub(r'\s+', ' ', body)[:64]
-            print(f"  WARN {msg}\n       \"{preview}...\"")
+            print(f"  {label} {msg}\n       \"{preview}...\"")
 
     # Entry minimum: non-project entries (experience, research) must not be left "light".
     # Projects are exempt — they are the trim buffer (2/1/0 bullets, header-only is fine).
@@ -474,11 +481,16 @@ def lint_density():
                       f"bullets from /base/, or drop the entry (don't ship a light entry).")
                 light += 1
 
-    print(f"\nLine-density: {total} bullets | {waste} waste-zone | {toolong} too-long | {light} light entries.")
+    print(f"\nLine-density: {total} bullets | {waste} waste-zone | {toolong} too-long | "
+          f"{short} underfilled (advisory) | {light} light entries.")
     if waste or toolong or light:
         print("Fix: right-size each flagged bullet (shorten, or split & fill from /base/), and give")
         print(f"every experience/research entry >={MIN_ENTRY_BULLETS} bullets or drop it. No fabrication.")
         return 1
+    if short:
+        print("OK (blocking checks pass). Advisory: some single-liners are short — growing them toward")
+        print(f"{LINT_SINGLE_MAX} chars with grounded detail tightens the ragged right edge, but this never fails the build.")
+        return 0
     print("OK: bullets are dense, and every non-project entry carries its weight.")
     return 0
 
